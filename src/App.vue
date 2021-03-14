@@ -1,9 +1,10 @@
 <template>
  <fragment>
-  <h1>Heros</h1>
+  <h1>Heros : {{ Heros.length }} </h1>
    <ul>
       <li v-for:="(hero, index) in Heros" :key="index">
-      {{ hero.name }} 
+      <div> {{ hero.name }} <button v-on:click="remove(index)">x</button>
+      </div> 
       </li>
    </ul>
    <form @submit.prevent="addHero">
@@ -18,15 +19,13 @@ export default {
   methods: {
     addHero(){
     if(this.newHero != ""){
-
-    
     this.Heros.push({ name: this.newHero });
     this.newHero = "";
      }
     },
-  },
-  removeHero(){
-
+      remove(index){
+    this.Heros = this.Heros.filter((hero, i) => i != index);
+   },
   },
   data() {
     return {
@@ -37,6 +36,7 @@ export default {
         {name: "Batman"},
         {name: "Arrow"},
       ],
+
     };
   },
 };
